@@ -12,13 +12,24 @@
     <h1>OurBrand New <br> Website Is On It's Way</h1>
     <p> Subscribe for more details.</p>
 
-    <form>
+    <form name="submit-to-google-sheet">
       <input type="email" name="email" placeholder="Enter your email" required>
       <button type="button"><img src="images/send-icon.png" width="30px
         "></button> 
     </form>
     <span>Thank You For Subscribing..!</span>
 
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbylE4MhkAEfH1oLnZVjgFpIDh7avHq1G-A5IRIyAPzfnQnhnx6u9JmBWVoBxI1rWw1K3g/exec'
+      const form = document.forms['submit-to-google-sheet']
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => console.log('Success!', response))
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
   </div>
 </body>
 </html>
